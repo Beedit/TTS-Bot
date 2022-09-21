@@ -3,6 +3,7 @@
 
 #### To do list
 - [x] Make the bot work
+- [ ] Make a queue system so that no messages get skipped
 - [ ] Make the channel specific for each server to use tts in instead of the entire server
 - [ ] Give each user using the bot a different voice using different language tts bots for voices (toggleable maybe)
 
