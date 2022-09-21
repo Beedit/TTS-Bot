@@ -1,6 +1,4 @@
 import asyncio
-from calendar import c
-from types import NoneType
 import discord
 from discord.ext import commands
 import os 
