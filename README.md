@@ -7,23 +7,24 @@
 - [ ] Make the channel specific for each server to use tts in instead of the entire server
 - [ ] Give each user using the bot a different voice using different language tts bots for voices (toggleable maybe)
 
-## Why?
+### Why?
 
 Got bored. Thought it would be fun. 
 
 ## How to use it
 
-Install GTTS, dotenv, Pycord and FFMPEG
+1. Install GTTS, dotenv, Pycord and FFMPEG
 
 ```
 pip install gtts py-cord python-dotenv ffmpeg
 ```
 
-In the file named .env, add your bot token.
+2. In the file named .env, add your bot token.
 
-In main.py, add your server ids to the servers list.
+3. In main.py, add your server ids to the servers list.
 
-Run the bot with the command:
+4. Run the bot with the command:
+
 ```
 python3 main.py
 ```
