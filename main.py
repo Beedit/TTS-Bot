@@ -28,19 +28,19 @@ async def on_ready():
 @bot.event
 async def on_message(ctx):
     if ctx.author.bot == False:
-        print(f"In {ctx.guild.name}, in channel {ctx.channel.name}, {ctx.author.name} said \"{ctx.content}\"")
+        print(f"In {ctx.guild.name}, in channel {ctx.channel.name}, {ctx.author.name} said \"{ctx.clean_content}\"")
         vc = discord.utils.get(bot.voice_clients, guild=ctx.guild)
         if vc != None:# and ("voice" in ctx.channel.name or "vc" in ctx.channel.name or "tts" in ctx.channel.name) : # <- This works i just dont want it for testing 
             if not vc.is_playing():
-                message = tts(ctx.author.name, ctx.content)
+                message = tts(ctx.author.name, ctx.clean_content)
                 message.save("message.mp3")
                 vc.play(discord.FFmpegPCMAudio(source="./message.mp3"))
             else:
                 print("Playing already")
-                queue.append([ctx.author.name, ctx.content])
+                queue.append([ctx.author.name, ctx.clean_content])
                 while vc.is_playing():
                     await asyncio.sleep(0.1)
-                while queue[0] != [ctx.author.name, ctx.content]:
+                while queue[0] != [ctx.author.name, ctx.clean_content]:
                     await asyncio.sleep(0.1)
                 message = tts(queue[0][0], queue[0][1])
                 message.save("message.mp3")
@@ -57,8 +57,12 @@ async def join(ctx):
     except:
         await ctx.respond("You are not in a VC or the bot can't see it.")
 
-@bot.slash_command(name='vars', guild_ids=servers, description='vars into terminal')
+# i made this test command wow
+@bot.slash_command(name='vars', guild_ids=servers, description='prints vars into terminal')
+@commands.is_owner()
 async def vars(ctx):
     print(queue)
-    ctx.respond("q")
+    await ctx.respond("q")
+
+
 bot.run(os.getenv('TOKEN')) 
