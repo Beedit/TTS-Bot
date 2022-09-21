@@ -6,13 +6,14 @@ from dotenv import load_dotenv
 from gtts import gTTS
 
 load_dotenv()
+servers = ["942042072083488768", "889094087595147295", "1021160480766709952"]
 queue = []
 
 # intents
 intent=discord.Intents.default()
 intent.message_content = True
 
-bot = commands.Bot(debug_guilds=["942042072083488768", "1021160480766709952"], intents=intent)
+bot = commands.Bot(debug_guilds=servers, intents=intent)
 
 # This is here so if i decide to do something more fancy with it then its easier probably.
 def tts(author, message):
@@ -49,7 +50,7 @@ async def on_message(ctx):
             join(ctx)
 
 
-@bot.slash_command(name='join', guild_ids=["942042072083488768", "889094087595147295", "1021160480766709952"], description='Tells the bot to join the voice channel')
+@bot.slash_command(name='join', guild_ids=servers, description='Tells the bot to join the voice channel')
 async def join(ctx):
     try:
         await ctx.respond("Attempting to join VC!")
@@ -57,7 +58,7 @@ async def join(ctx):
     except:
         await ctx.respond("You are not in a VC or the bot can't see it.")
 
-@bot.slash_command(name='vars', guild_ids=["942042072083488768", "889094087595147295", "1021160480766709952"], description='vars into terminal')
+@bot.slash_command(name='vars', guild_ids=servers, description='vars into terminal')
 async def vars(ctx):
     print(queue)
     ctx.respond("q")

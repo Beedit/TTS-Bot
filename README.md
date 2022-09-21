@@ -21,6 +21,8 @@ pip install gtts py-cord python-dotenv ffmpeg
 
 In the file named .env, add your bot token.
 
+In main.py, add your server ids to the servers list.
+
 Run the bot with the command:
 ```
 python3 main.py
