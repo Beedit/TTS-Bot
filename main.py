@@ -36,7 +36,7 @@ async def on_message(ctx):
                 message.save("message.mp3")
                 vc.play(discord.FFmpegPCMAudio(source="./message.mp3"))
             else:
-                print("PLaying already")
+                print("Playing already")
                 queue.append([ctx.author.name, ctx.content])
                 while vc.is_playing():
                     await asyncio.sleep(0.1)
@@ -46,8 +46,6 @@ async def on_message(ctx):
                 message.save("message.mp3")
                 vc.play(discord.FFmpegPCMAudio(source="./message.mp3"))
                 queue.pop(0)
-        else:
-            join(ctx)
 
 
 @bot.slash_command(name='join', guild_ids=servers, description='Tells the bot to join the voice channel')
