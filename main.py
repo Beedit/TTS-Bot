@@ -30,7 +30,7 @@ async def on_message(ctx):
     if ctx.author.bot == False:
         print(f"In {ctx.guild.name}, in channel {ctx.channel.name}, {ctx.author.name} said \"{ctx.content}\"")
         vc = discord.utils.get(bot.voice_clients, guild=ctx.guild)
-        if vc != None: 
+        if vc != None:# and ("voice" in ctx.channel.name or "vc" in ctx.channel.name or "tts" in ctx.channel.name) : # <- This works i just dont want it for testing 
             if not vc.is_playing():
                 message = tts(ctx.author.name, ctx.content)
                 message.save("message.mp3")
@@ -44,6 +44,7 @@ async def on_message(ctx):
                     await asyncio.sleep(0.1)
                 message = tts(queue[0][0], queue[0][1])
                 message.save("message.mp3")
+                await asyncio.sleep(0.3)
                 vc.play(discord.FFmpegPCMAudio(source="./message.mp3"))
                 queue.pop(0)
 
