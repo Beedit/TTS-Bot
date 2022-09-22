@@ -1,4 +1,5 @@
 # TTS-Bot
+# This bot does not work well right now. Like at all. It should not be used.
 ## A Discord Text-To-Speech bot written in python.
 
 #### To do list
