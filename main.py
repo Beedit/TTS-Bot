@@ -55,10 +55,10 @@ async def join(ctx):
         await ctx.respond("Attempting to join VC!")
         await ctx.author.voice.channel.connect()
     except:
-        await ctx.respond("You are not in a VC or the bot can't see it.")
+        await ctx.respond("You are not in a VC or the bot can't see it or there was an error. If this continues mass ping the owner.")
 
 # i made this test command wow
-@bot.slash_command(name='vars', guild_ids=servers, description='prints vars into terminal')
+@bot.slash_command(name='vars', guild_ids=servers, description='prints vars into terminal. ONLY WORKS IF UR OWNER BOZO')
 @commands.is_owner()
 async def vars(ctx):
     print(queue)
