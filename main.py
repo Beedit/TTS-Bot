@@ -16,7 +16,7 @@ intent.message_content = True
 bot = commands.Bot(debug_guilds=servers, intents=intent)
 
 # This is here so if i decide to do something more fancy with it then its easier probably.
-def tts(author, message):
+def tts(author, message, ctx):
     return gTTS(f"{author} said {message}")
 
 # Prints a message when the bot comes online.
@@ -32,20 +32,20 @@ async def on_message(ctx):
         vc = discord.utils.get(bot.voice_clients, guild=ctx.guild)
         if vc != None:# and ("voice" in ctx.channel.name or "vc" in ctx.channel.name or "tts" in ctx.channel.name) : # <- This works i just dont want it for testing 
             if not vc.is_playing():
-                message = tts(ctx.author.name, ctx.clean_content)
+                message = tts(ctx.author.name, ctx.clean_content, ctx)
                 message.save("message.mp3")
                 vc.play(discord.FFmpegPCMAudio(source="./message.mp3"))
             else:
                 print("Playing already")
                 queue.append([ctx.author.name, ctx.clean_content])
                 while vc.is_playing():
-                    await asyncio.sleep(0.1)
+                    await asyncio.sleep(1)
                 while queue[0] != [ctx.author.name, ctx.clean_content]:
                     await asyncio.sleep(0.1)
-                message = tts(queue[0][0], queue[0][1])
+                message = tts(queue[0][0], queue[0][1], ctx)
                 message.save("message.mp3")
                 await asyncio.sleep(0.3)
-                vc.play(discord.FFmpegPCMAudio(source="./message.mp3"))
+                vc.play(discord.FFmpegPCMAudio(source=message))
                 queue.pop(0)
 
 
